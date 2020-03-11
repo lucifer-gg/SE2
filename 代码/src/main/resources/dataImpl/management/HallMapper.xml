@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.cinema.data.management.HallMapper">
+    <select id="selectAllHall" resultMap="Hall">
+        select * from hall
+    </select>
+
+    <select id="selectHallById" resultMap="Hall">
+        select * from hall where id = #{hallId}
+    </select>
+
+    <insert id="insertOneHall" parameterType="com.example.cinema.po.Hall"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into hall(name, `column`, row, `type`)
+        values(#{name}, #{column}, #{row}, #{type})
+    </insert>
+
+    <update id="updateHall" parameterType="com.example.cinema.po.Hall">
+        update hall
+        set name=#{name}, `column`=#{column}, row=#{row}, `type`=#{type}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteHall">
+        delete
+        from hall
+        where id = #{id}
+    </delete>
+
+    <select id="checkHallName" resultType="int">
+        select count(id)
+        from hall
+        where name = #{hallName}
+          and id != #{hallId}
+    </select>
+
+    <resultMap id="Hall" type="com.example.cinema.po.Hall">
+    </resultMap>
+
+</mapper>
